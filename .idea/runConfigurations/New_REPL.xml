@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="New REPL" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+    <option name="configVersion" value="1" />
+    <option name="displayName" value="New REPL" />
+    <module name="iban-validator-clojure" />
+    <option name="options" />
+    <option name="profiles" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2" />
+  </configuration>
+</component>
