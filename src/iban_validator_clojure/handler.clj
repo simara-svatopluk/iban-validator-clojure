@@ -1,0 +1,28 @@
+(ns iban-validator-clojure.handler
+  (:require [iban-validator-clojure.core :refer :all]
+            [compojure.core :refer :all]
+            [compojure.route :as route]
+            [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+            ))
+
+(def banks
+  (xml-file-to-map "src/iban_validator_clojure/banks.xml")
+  )
+
+(def iban-structure
+  (xml-file-to-map "src/iban_validator_clojure/iban-structure.xml")
+  )
+
+(def find-bic-runtime
+  (partial find-bic (map-country-to-fields iban-structure)
+           (map-country-to-bank-details banks)
+           )
+  )
+
+(defroutes app-routes
+           (GET "/" [] "Hello World!!!")
+           (GET "/find-bic/:iban" [iban] (find-bic-runtime iban))
+           (route/not-found "Not Found"))
+
+(def app
+  (wrap-defaults app-routes site-defaults))
