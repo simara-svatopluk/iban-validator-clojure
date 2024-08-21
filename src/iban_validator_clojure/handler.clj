@@ -20,7 +20,7 @@
   )
 
 (defroutes app-routes
-           (GET "/" [] "Hello World!!!")
+           (GET "/" [] "Go to: <br> <a href='/find-bic/CZ6920100000001234567899'>/find-bic/CZ6920100000001234567899</a>")
            (GET "/find-bic/:iban" [iban] (find-bic-runtime iban))
            (route/not-found "Not Found"))
 

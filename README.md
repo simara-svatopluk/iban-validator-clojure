@@ -3,6 +3,12 @@
 Goal of this project is to demonstrate that Clojure can be useful.
 Mainly for me.
 
+# Try It
+
+In console run `lein ring server`
+
+That should open a browser, and follow instructions there
+
 # Thanks
 
 Special thanks to my wife for patience;
