@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<structures>
+    <structure>
+        <country>CZ</country>
+        <chars>24</chars>
+        <bban>20n</bban>
+        <iban-fields>CZkkbbbbppppppcccccccccc</iban-fields>
+    </structure>
+    <structure>
+        <country>NL</country>
+        <chars>18</chars>
+        <bban>4a,10n</bban>
+        <iban-fields>NLkkbbbbcccccccccc</iban-fields>
+    </structure>
+</structures>

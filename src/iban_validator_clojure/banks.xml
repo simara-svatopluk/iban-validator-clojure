@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<banks>
+    <bank>
+        <country>CZ</country>
+        <bank-code>2010</bank-code>
+        <bic>FIOBCZPPXXX</bic>
+    </bank>
+    <bank>
+        <country>CZ</country>
+        <bank-code>0300</bank-code>
+        <bic>CEKOCZPPXXX</bic>
+    </bank>
+    <bank>
+        <country>NL</country>
+        <bank-code>YOUR</bank-code>
+        <bic>YOURNL2AXXX</bic>
+    </bank>
+</banks>
