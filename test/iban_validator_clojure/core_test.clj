@@ -1,12 +1,12 @@
 (ns iban-validator-clojure.core_test
-  (:require [clojure.test :refer :all]
-            [iban_validator_clojure.core :refer :all]))
-
+  (:require [clojure.java.io :as io]
+            [clojure.test :refer :all]
+            [iban-validator-clojure.core :refer :all]))
 
 (deftest feature
   (let [
-        test-banks (xml-file-to-map "src/iban_validator_clojure/banks.xml")
-        test-iban-structure (xml-file-to-map "src/iban_validator_clojure/iban-structure.xml")
+        test-banks (xml-file-to-map (io/resource "banks.xml"))
+        test-iban-structure (xml-file-to-map (io/resource "iban-structure.xml"))
         test-find-bic (partial find-bic
                                (map-country-to-fields test-iban-structure)
                                (map-country-to-bank-details test-banks)

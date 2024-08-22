@@ -1,22 +1,19 @@
 (ns iban-validator-clojure.handler
-  (:require [iban-validator-clojure.core :refer :all]
+  (:require [clojure.java.io :as io]
+            [iban-validator-clojure.core :refer :all]
             [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
             ))
 
 (def banks
-  (xml-file-to-map "src/iban_validator_clojure/banks.xml")
-  )
+  (xml-file-to-map (io/resource "banks.xml")))
 
 (def iban-structure
-  (xml-file-to-map "src/iban_validator_clojure/iban-structure.xml")
-  )
+  (xml-file-to-map (io/resource "iban-structure.xml")))
 
 (def find-bic-runtime
-  (partial find-bic (map-country-to-fields iban-structure)
-           (map-country-to-bank-details banks)
-           )
+  (partial find-bic (map-country-to-fields iban-structure) (map-country-to-bank-details banks))
   )
 
 (defroutes app-routes
