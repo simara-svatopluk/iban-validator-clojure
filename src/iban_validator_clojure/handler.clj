@@ -13,18 +13,11 @@
   (xml-file-to-map (io/resource "iban-structure.xml")))
 
 (def find-bic-runtime
-  (partial find-bic (map-country-to-fields iban-structure) (map-country-to-bank-details banks))
-  )
-
-(defn find-bic-handler [iban]
-  {:status 200
-   :headers {"Content-Type" "text/plain"}
-   :body (find-bic-runtime iban)}
-  )
+  (partial find-bic (map-country-to-fields iban-structure) (map-country-to-bank-details banks)))
 
 (defroutes app-routes
            (GET "/" [] (io/resource "index.html"))
-           (GET "/find-bic/:iban" [iban] (find-bic-handler iban))
+           (GET "/find-bic/:iban" [iban] {:headers {"Content-Type" "text/plain"} :body (find-bic-runtime iban)})
            (route/not-found "Not Found"))
 
 (def app
