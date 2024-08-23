@@ -107,14 +107,11 @@
   )
 
 (defn find-bic [map-of-country-to-fields map-of-country-to-bank-details iban]
-  (let [country (iban-country iban)]
-    (let [iban-fields (map-of-country-to-fields country)]
-      (let [map-of-banks (map-of-country-to-bank-details country)]
-        (->> (extract-bank-code iban-fields iban)
-             map-of-banks
-             )
-        )
-      )
-    )
-  )
+  (let [country (iban-country iban)
+        iban-fields (map-of-country-to-fields country)
+        map-of-banks (map-of-country-to-bank-details country)]
+    (->> (extract-bank-code iban-fields iban)
+         map-of-banks
+         )
+    ))
 
