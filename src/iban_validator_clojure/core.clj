@@ -110,8 +110,10 @@
   (let [country (iban-country iban)
         iban-fields (map-of-country-to-fields country)
         map-of-banks (map-of-country-to-bank-details country)]
-    (->> (extract-bank-code iban-fields iban)
-         map-of-banks
-         )
+    (when (every? some? (list country iban-fields map-of-banks))
+      (->> (extract-bank-code iban-fields iban)
+           map-of-banks
+           )
+      )
     ))
 
