@@ -15,9 +15,24 @@
 (def find-bic-runtime
   (partial find-bic (map-country-to-fields iban-structure) (map-country-to-bank-details banks)))
 
+
+(defn find-iban-handler [iban]
+  (let [result (find-bic-runtime iban)]
+    (cond result {
+                  :headers {"Content-Type" "text/plain"}
+                  :body result
+                  }
+          :else {
+                 :status 400
+                 :headers {"Content-Type" "text/plain"}
+                 :body "BIC not found"
+                 })))
+
+
+
 (defroutes app-routes
            (GET "/" [] (io/resource "index.html"))
-           (GET "/find-bic/:iban" [iban] {:headers {"Content-Type" "text/plain"} :body (find-bic-runtime iban)})
+           (GET "/find-bic/:iban" [iban] (find-iban-handler iban))
            (route/not-found "Not Found"))
 
 (def app
