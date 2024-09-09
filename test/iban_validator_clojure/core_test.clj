@@ -3,6 +3,17 @@
             [clojure.test :refer :all]
             [iban-validator-clojure.core :refer :all]))
 
+(deftest iban-validation
+  (testing "Valid IBAN checksum"
+    (is (true? (valid-iban-checksum? "CZ9050513587633843814896")))
+    (is (true? (valid-iban-checksum? "NL18ABNA1041035373")))
+    )
+  (testing "Invalid IBAN checksum"
+    (is (false? (valid-iban-checksum? "CZ9950513587633843814896")))
+    (is (false? (valid-iban-checksum? "NX18ABNA1041035373")))
+    )
+  )
+
 (deftest feature
   (let [
         test-banks (xml-file-to-map (io/resource "banks.xml"))

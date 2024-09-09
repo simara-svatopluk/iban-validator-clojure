@@ -15,11 +15,10 @@
 
 (defn valid-iban-checksum? [input]
   (->> (concat (drop 4 input) (take 4 input))
-       (map char-to-int)
-       (map str)
+       (map (comp str char-to-int))
        (apply str)
-       (bigint)
-       ((fn [n] (rem n 97)))
+       bigint
+       (#(rem % 97))
        (= 1)
        )
   )
