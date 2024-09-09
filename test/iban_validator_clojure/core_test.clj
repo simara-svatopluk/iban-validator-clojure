@@ -14,6 +14,27 @@
     )
   )
 
+(deftest iban-validation-with-bic
+  (let [
+        test-banks (xml-file-to-map (io/resource "banks.xml"))
+        test-iban-structure (xml-file-to-map (io/resource "iban-structure.xml"))
+        test-find-bic (partial find-bic
+                               (map-country-to-fields test-iban-structure)
+                               (map-country-to-bank-details test-banks)
+                               )
+        test-validate-iban (partial validate-iban test-find-bic)
+        ]
+
+   (testing "Invalid IBAN checksum"
+    (is (= {:valid false :reason :checksum} (test-validate-iban "CZ9950513587633843814896")))
+    )
+  (testing "Invalid BIC"
+    (is (= {:valid false :reason :bic} (test-validate-iban "CZ7407100000001234567899")))
+    )
+  (testing "Valid"
+    (is (= {:valid true :bic "YOURNL2AXXX"} (test-validate-iban "NL91YOUR9000000009")))
+    )))
+
 (deftest feature
   (let [
         test-banks (xml-file-to-map (io/resource "banks.xml"))

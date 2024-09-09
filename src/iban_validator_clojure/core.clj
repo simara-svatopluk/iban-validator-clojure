@@ -116,3 +116,14 @@
       )
     ))
 
+(defn validate-iban [find-bic-fn iban]
+  (cond
+    (valid-iban-checksum? iban) (let [bic (find-bic-fn iban)]
+                                  (cond
+                                    (nil? bic) {:valid false :reason :bic}
+                                    :else {:valid true :bic bic}
+                                    )
+                                  )
+    :else {:valid false :reason :checksum}
+    )
+  )
