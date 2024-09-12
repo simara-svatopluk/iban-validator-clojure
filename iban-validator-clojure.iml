@@ -36,6 +36,7 @@
     <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.11.1" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/core.specs.alpha:0.2.62" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/spec.alpha:0.3.218" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/test.check:1.1.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/tools.macro:0.1.5" level="project" />
     <orderEntry type="library" name="Leiningen: org.eclipse.jetty.toolchain/jetty-jakarta-servlet-api:5.0.2" level="project" />
     <orderEntry type="library" name="Leiningen: org.eclipse.jetty.websocket/websocket-core-common:11.0.20" level="project" />
