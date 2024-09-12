@@ -1,7 +1,10 @@
 (ns iban-validator-clojure.core_test
   (:require [clojure.java.io :as io]
             [clojure.test :refer :all]
-            [iban-validator-clojure.core :refer :all]))
+            [iban-validator-clojure.core-spec :refer :all]
+            [iban-validator-clojure.core :refer :all]
+            )
+  (:import (clojure.lang ExceptionInfo)))
 
 (deftest iban-validation
   (testing "Valid IBAN checksum"
@@ -64,13 +67,20 @@
                                (map-country-to-bank-details test-banks)
                                )
         ]
-    (testing "Too short IBAN"
-      (is (= nil (test-find-bic ""))))
-    (testing "Invalid inputs"
-      (is (= nil (test-find-bic nil)))
-      (is (= nil (test-find-bic {})))
-      (is (= nil (test-find-bic #{}))))
-    (testing "Unknown country"
+    (testing "short IBAN"
+      (is (= nil (test-find-bic "xx"))))
+    (testing "unknown country"
       (is (= nil (test-find-bic "XX7407100000001234567899"))))
     )
+  )
+
+(deftest spec-test
+  (testing boolean-to-int
+    (is (thrown? ExceptionInfo (boolean-to-int 10))))
+  (testing char-to-int
+    (is (thrown? ExceptionInfo (char-to-int 10))))
+  (testing valid-iban-checksum?
+    (is (thrown? ExceptionInfo (valid-iban-checksum? 10))))
+  (testing iban-country
+    (is (thrown? ExceptionInfo (iban-country 10))))
   )

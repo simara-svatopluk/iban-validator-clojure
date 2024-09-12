@@ -7,6 +7,7 @@
                  [ring/ring-core "1.12.1"]
                  [ring/ring-jetty-adapter "1.12.1"]
                  [ring/ring-defaults "0.5.0"]
+                 [org.clojure/test.check "1.1.0"]
                  ]
   :plugins [[lein-ring "0.12.6"]]
   :ring {:handler iban-validator-clojure.handler/app}

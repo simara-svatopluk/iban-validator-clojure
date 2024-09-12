@@ -1,10 +1,10 @@
-(ns iban-validator-clojure.core)
+(ns iban-validator-clojure.core
+  (:require [clojure.xml :as xml]))
 
-(require '[clojure.xml :as xml] '[clojure.string :as string])
 (import java.io.ByteArrayInputStream)
 
-(defn boolean-to-int [boolean]
-  (if boolean 1 0))
+(defn boolean-to-int [input]
+  (if input 1 0))
 
 (defn char-to-int [c]
   (cond
@@ -22,7 +22,6 @@
        (= 1)
        )
   )
-
 
 (defn iban-country [iban]
   (apply str (take 2 iban)))
